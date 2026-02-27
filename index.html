@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>    
+<html>
 <head>
   <meta charset="UTF-8">
   <title>Registrando...</title>
@@ -10,24 +10,14 @@
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id") || "sin id";
     const nombre = params.get("nombre") || "sin nombre";
-    const ua = navigator.userAgent;    
+    const ua = navigator.userAgent;
 
-    const url = "https://script.google.com/macros/s/AKfycbyf2WwlH9GLSPc7YpOm5wR8QO_bn0AlgiOK-ldWlLEwokYBEn6amIXs6T9stR8V0KW09Q/exec"
+    const url = "https://script.google.com/macros/s/TU_URL/exec"
       + "?id=" + encodeURIComponent(id)
       + "&nombre=" + encodeURIComponent(nombre)
       + "&ua=" + encodeURIComponent(ua);
 
-    fetch(url)
-      .then(() => {
-        document.body.innerHTML = `
-          <h2>✅ Registrado!</h2>
-          <p><b>Nombre:</b> ${nombre}</p>
-          <p><b>Tag:</b> ${id}</p>
-        `;
-      })
-      .catch(() => {
-        document.body.innerHTML = "<h2>❌ Error al registrar</h2>";
-      });
+    window.location.href = url;
   </script>
 </body>
 </html>
