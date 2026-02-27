@@ -5,19 +5,29 @@
   <title>Registrando...</title>
 </head>
 <body style="font-family:sans-serif; text-align:center; padding:40px">
-  <h2>⏳ Registrando...</h2>
+  <h2>⏳ Obteniendo ubicación...</h2>
   <script>
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id") || "sin id";
     const nombre = params.get("nombre") || "sin nombre";
-    const ua = navigator.userAgent;
 
-    const url = "https://script.google.com/macros/s/AKfycbyf2WwlH9GLSPc7YpOm5wR8QO_bn0AlgiOK-ldWlLEwokYBEn6amIXs6T9stR8V0KW09Q/exec"
-      + "?id=" + encodeURIComponent(id)
-      + "&nombre=" + encodeURIComponent(nombre)
-      + "&ua=" + encodeURIComponent(ua);
+    function enviar(lat, lon) {
+      const url = "https://script.google.com/macros/s/AKfycbyf2WwlH9GLSPc7YpOm5wR8QO_bn0AlgiOK-ldWlLEwokYBEn6amIXs6T9stR8V0KW09Q/exec"
+        + "?id=" + encodeURIComponent(id)
+        + "&nombre=" + encodeURIComponent(nombre)
+        + "&lat=" + encodeURIComponent(lat)
+        + "&lon=" + encodeURIComponent(lon);
+      window.location.href = url;
+    }
 
-    window.location.href = url;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        pos => enviar(pos.coords.latitude, pos.coords.longitude),
+        err => enviar("sin ubicacion", "sin ubicacion")
+      );
+    } else {
+      enviar("no soportado", "no soportado");
+    }
   </script>
 </body>
 </html>
