@@ -11,14 +11,27 @@
     const id = params.get("id") || "sin id";
     const nombre = params.get("nombre") || "sin nombre";
 
-    function enviar(lat, lon) {
+  /*  function enviar(lat, lon) {
       const url = "https://script.google.com/macros/s/AKfycbyf2WwlH9GLSPc7YpOm5wR8QO_bn0AlgiOK-ldWlLEwokYBEn6amIXs6T9stR8V0KW09Q/exec"
         + "?id=" + encodeURIComponent(id)
         + "&nombre=" + encodeURIComponent(nombre)
         + "&lat=" + encodeURIComponent(lat)
         + "&lon=" + encodeURIComponent(lon);
       window.location.href = url;
-    }
+    } */
+    function enviar(lat, lon) {
+      document.querySelector("h2").innerHTML = "✅ Ubicación obtenida, registrando...";
+  
+      const url = "https://script.google.com/macros/s/AKfycbyf2WwlH9GLSPc7YpOm5wR8QO_bn0AlgiOK-ldWlLEwokYBEn6amIXs6T9stR8V0KW09Q/exec"
+        + "?id=" + encodeURIComponent(id)
+        + "&nombre=" + encodeURIComponent(nombre)
+        + "&lat=" + encodeURIComponent(lat)
+        + "&lon=" + encodeURIComponent(lon);
+
+      setTimeout(() => {
+        window.location.href = url;
+      }, 1000);
+}
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
